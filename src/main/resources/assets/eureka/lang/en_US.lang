@@ -9,7 +9,9 @@ eureka.dusterTier1Finished=While processing your ores, you suddenly realize ther
 eureka.dusterTier2-1Finished=After being able to output to inventories you decide to try to see if you can automate the processing itself instead.
 eureka.dusterTier2-2Finished=You like that you don't have to jump on the machine, but also want the auto-input/output. You decide to combine your knowledge intro a new machine. Maybe something with lasers?
 eureka.kineticToolFinished=While making yet another tool to replace your old one you think of a way to make a tool that won't break
-eureka.missingKnowledge=You have no idea how this machine works (yet). You try to use it, but due to your incompetence, it falls apart.
+eureka.missingKnowledge0=You have no idea how this machine works (yet). You try to use it, but due to your incompetence, it falls apart.
+eureka.missingKnowledge1=You believe you don't know how to use this machine. It falls apart upon you trying to get it to work.
+eureka.missingKnowledge2=You realise you lack the skills needed to operate this machine. The machine doesn't want to work,so you decide to hit it with a hammer. The machine breaks.
 eureka.missingKnowledgeKineticTool=You have no idea how this tool works (yet). You try to use it, but due to your incompetence, it falls apart.
 
 engineeringDiary.Eureka.title=Engineering Diary

@@ -1,28 +1,25 @@
 package eureka.core;
 
+import buildcraft.api.events.PipePlacedEvent;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent;
+import eureka.Eureka;
+import eureka.api.EurekaKnowledge;
+import eureka.api.EurekaRegistry;
+import eureka.utils.Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
-
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
-import buildcraft.api.events.PipePlacedEvent;
-
-
-import eureka.Eureka;
-import eureka.api.EurekaKnowledge;
-import eureka.api.EurekaRegistry;
-import eureka.utils.Utils;
+import java.util.Random;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -33,8 +30,9 @@ import eureka.utils.Utils;
  */
 public class EventHandler {
 
-	public static class FML {
 
+	public static class FML {
+		Random randomgen = new Random();
 		@SubscribeEvent
 		public void playerLogin(PlayerEvent.PlayerLoggedInEvent event) {
 			//initialize player knowledge if needed
@@ -58,7 +56,8 @@ public class EventHandler {
 			String pipe = event.pipeType.replace("item.", "").toLowerCase();
 			String key = EurekaRegistry.getKey(pipe);
 			if (!key.equals("") && !EurekaKnowledge.isFinished(event.player, key)) {
-				event.player.addChatComponentMessage(new ChatComponentText(Utils.localize("eureka.missingKnowledge")));
+				event.player.addChatComponentMessage(new ChatComponentText(Utils.localize(("eureka.missingKnowledge" + randomgen.nextInt(3)))));
+				event.player.addChatComponentMessage(new ChatComponentText(new String()));
 				event.player.worldObj.setBlockToAir(event.x, event.y, event.z);
 				dropItemsFromList(event.player.worldObj, event.x, event.y, event.z, EurekaRegistry.getDrops(key));
 				return;
@@ -90,7 +89,7 @@ public class EventHandler {
 
 
 	public static class Forge {
-
+		Random randomgen = new Random();
 		@SubscribeEvent
 		public void BucketFill(FillBucketEvent event) {
 			for (String key: EurekaRegistry.getBucketFillList())
@@ -133,7 +132,8 @@ public class EventHandler {
 			int z = event.blockSnapshot.z;
 			if (!key.equals(""))
 				if (!EurekaKnowledge.isFinished(event.player, key)){
-					event.player.addChatComponentMessage(new ChatComponentText(Utils.localize("eureka.missingKnowledge")));
+					event.player.addChatComponentMessage(new ChatComponentText(Utils.localize(("eureka.missingKnowledge" + randomgen.nextInt(3)))));
+					event.player.addChatComponentMessage(new ChatComponentText(new String()));
 					event.world.setBlockToAir(x, y, z);
 					dropItemsFromList(event.world, x, y, z, EurekaRegistry.getDrops(key));
 				}
